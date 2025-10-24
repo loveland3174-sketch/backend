@@ -1,5 +1,5 @@
 const { defineConfig } = require("@medusajs/framework/utils");
-require("dotenv").config(); // <-- load .env variables
+require("dotenv").config();
 
 const {
   DATABASE_URL,
@@ -12,7 +12,7 @@ const {
 
 module.exports = defineConfig({
   projectConfig: {
-    databaseUrl: DATABASE_URL, // Supabase pooler URL from .env
+    databaseUrl: DATABASE_URL,
     http: {
       storeCors: STORE_CORS || "*",
       adminCors: ADMIN_CORS || "*",
