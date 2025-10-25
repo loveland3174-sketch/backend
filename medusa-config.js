@@ -8,11 +8,13 @@ const {
   AUTH_CORS,
   JWT_SECRET,
   COOKIE_SECRET,
+  REDIS_URL,
 } = process.env;
 
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: DATABASE_URL,
+    redisUrl: REDIS_URL, // <-- Add this
     http: {
       storeCors: STORE_CORS || "*",
       adminCors: ADMIN_CORS || "*",
