@@ -15,9 +15,9 @@ const {
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: DATABASE_URL,
-    // Only set Redis if REDIS_URL exists
     redisUrl: REDIS_URL && REDIS_URL.length > 0 ? REDIS_URL : undefined,
-    port: PORT || 9000, // Ensures Render detects the open port
+    eventBusStrategy: "redis", // Enable Redis Event Bus
+    port: PORT || 9000,
     http: {
       storeCors: STORE_CORS || "*",
       adminCors: ADMIN_CORS || "*",
@@ -26,8 +26,29 @@ module.exports = defineConfig({
       cookieSecret: COOKIE_SECRET || "supersecret",
     },
   },
+
+  admin: {
+    disable: true, // Production backend. No admin UI here.
+  },
+
+  modules: {
+    eventBus: {
+      resolve: "@medusajs/event-bus-redis",
+      options: {
+        redisUrl: REDIS_URL,
+      },
+    },
+    cache: {
+      resolve: "@medusajs/cache-redis",
+      options: {
+        redisUrl: REDIS_URL,
+      },
+    },
+  },
+
   plugins: [],
 });
+
 
 
 // const { defineConfig } = require("@medusajs/framework/utils");
