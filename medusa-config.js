@@ -16,7 +16,7 @@ module.exports = defineConfig({
   projectConfig: {
     databaseUrl: DATABASE_URL,
     redisUrl: REDIS_URL,
-    port: PORT || 9000, // Ensure Medusa binds to the correct port for Render
+    port: PORT || 9000, // Ensures Render detects the open port
     http: {
       storeCors: STORE_CORS || "*",
       adminCors: ADMIN_CORS || "*",
@@ -25,4 +25,5 @@ module.exports = defineConfig({
       cookieSecret: COOKIE_SECRET || "supersecret",
     },
   },
+  plugins: [],
 });
