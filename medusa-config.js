@@ -28,7 +28,7 @@ module.exports = defineConfig({
   },
 
   admin: {
-    disable: true, // Production backend. No admin UI here.
+    disable: false, // Production backend. No admin UI here.
   },
 
   modules: {
