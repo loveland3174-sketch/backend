@@ -15,8 +15,9 @@ const {
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: DATABASE_URL,
-    redisUrl: REDIS_URL && REDIS_URL.length > 0 ? REDIS_URL : undefined,
-    eventBusStrategy: "redis", // Enable Redis Event Bus
+    databaseType: "postgres", // ✅ Required for Supabase/Postgres
+    redisUrl: REDIS_URL || undefined,
+    eventBusStrategy: "redis", // ✅ Required for Render Redis event processing
     port: PORT || 9000,
     http: {
       storeCors: STORE_CORS || "*",
@@ -28,9 +29,10 @@ module.exports = defineConfig({
   },
 
   admin: {
-    disable: false, // Production backend. No admin UI here.
+    disable: true, // ✅ No Admin UI inside backend build
   },
 
+  // ✅ Modules optimized for Render
   modules: {
     eventBus: {
       resolve: "@medusajs/event-bus-redis",
@@ -46,9 +48,8 @@ module.exports = defineConfig({
     },
   },
 
-  plugins: [],
+  plugins: [], // ✅ clean & lightweight
 });
-
 
 
 // const { defineConfig } = require("@medusajs/framework/utils");
